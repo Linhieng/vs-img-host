@@ -3,7 +3,9 @@
   "publisher": "linhieng",
   "version": "0.0.1",
   "license": "MIT",
-  "repository": {},
+  "repository": {
+    "url": "https://github.com/Linhieng/vs-img-host"
+  },
   "engines": {
     "vscode": "^1.86.0"
   },
