@@ -1,0 +1,100 @@
+{
+  "name": "lin",
+  "publisher": "linhieng",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {},
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "lin.uploadImageFromClipboard",
+        "title": "Upload image from clipboard",
+        "category": "lin"
+      },
+      {
+        "command": "lin.uploadImageFromExplorer",
+        "title": "Upload image from explorer",
+        "category": "lin"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "lin.uploadImageFromClipboard",
+        "key": "ctrl+alt+U"
+      },
+      {
+        "command": "lin.uploadImageFromExplorer",
+        "key": "ctrl+alt+E"
+      }
+    ],
+    "configuration": {
+      "title": "lin",
+      "properties": {
+        "lin.enableConfigPath": {
+          "type": "boolean",
+          "default": false,
+          "description": "开启 lin.configPath 配置项。开启后必须指定 lin.configPath"
+        },
+        "lin.configPath": {
+          "type": "string",
+          "description": "使用本地 json 文件获取四项关键值：region, bucket, accessKeyId, accessKeySecret。"
+        },
+        "lin.destFileFolder": {
+          "type": "string",
+          "default": "blog/",
+          "description": "填写云端保存目录，以 / 结尾"
+        },
+        "lin.region": {
+          "type": "string",
+          "description": "（必需）填写 Bucket 所在地域，比如oss-cn-hangzhou。"
+        },
+        "lin.bucket": {
+          "type": "string",
+          "description": "（必需）填写你创建的 Bucket 名称。"
+        },
+        "lin.accessKeyId": {
+          "type": "string",
+          "description": "（必需）填写 RAM 用户的 AccessKey ID"
+        },
+        "lin.accessKeySecret": {
+          "type": "string",
+          "description": "（必需）填写 RAM 用户的 AccessKey Secret"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "package": "node package.cjs && npm run bundle && cd dist && npx @vscode/vsce package",
+    "bundle": "node esbuild.config.js",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/ali-oss": "^6.16.11",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.86.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "@vscode/test-cli": "^0.0.6",
+    "@vscode/test-electron": "^2.3.9",
+    "esbuild": "^0.20.1",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "ali-oss": "^6.20.0"
+  }
+}
