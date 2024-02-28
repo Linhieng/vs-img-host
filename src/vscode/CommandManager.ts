@@ -84,8 +84,9 @@ export async function uploadFile(filePath: string, destFilePath?: string) {
             try {
                 const result = await client.put(destFilePath, path.normalize(filePath))
                 return result
-            } catch (e) {
-                vscode.window.showErrorMessage('上传失败')
+            } catch (e: any) {
+                vscode.window.showErrorMessage('上传失败: ' + e.message + '如果是 502 错误，可能是因为开了代理')
+                console.error(e)
                 return
             }
         })
